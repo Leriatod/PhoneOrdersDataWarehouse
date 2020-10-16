@@ -7,12 +7,14 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { PhoneListComponent } from './phone-list/phone-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
+    PhoneListComponent,
 
   ],
   imports: [
@@ -20,7 +22,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' }
+      { path: '', component: HomeComponent },
+      { path: 'phone-list', component: PhoneListComponent }
     ])
   ],
   providers: [],
