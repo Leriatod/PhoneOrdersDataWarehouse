@@ -18,6 +18,12 @@ namespace PhoneDataWarehouse.Mapping
                 .ForMember(p => p.CategoryName, opt => opt.MapFrom(pdto => pdto.Category.Name))
                 .ForMember(p => p.OS, opt => opt.MapFrom(pdto => pdto.Category.OS));
             
+            
+            CreateMap<AlloPhoneDto, Phone>()
+                .ForMember(p => p.Id, opt => opt.Ignore())
+                .ForMember(p => p.ScreenSize, opt => opt.MapFrom(pdto => pdto.ScreenDiagonal))
+                .ForMember(p => p.CategoryName, opt => opt.MapFrom(pdto => pdto.Maker.Name));
+                
 
         }
 
