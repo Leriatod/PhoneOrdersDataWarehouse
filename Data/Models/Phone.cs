@@ -11,7 +11,7 @@ namespace PhoneDataWarehouse.Data.Models
         [Required]
         [StringLength(255)]
         public string Name { get; set; }
-        [Column(TypeName = "DECIMAL(2, 2)")]
+        [Column(TypeName = "DECIMAL(4, 2)")]
         public decimal ScreenSize { get; set; }
         [Required]
         [StringLength(255)]
