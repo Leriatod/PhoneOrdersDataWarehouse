@@ -23,8 +23,11 @@ namespace PhoneDataWarehouse.Mapping
                 .ForMember(p => p.Id, opt => opt.Ignore())
                 .ForMember(p => p.ScreenSize, opt => opt.MapFrom(pdto => pdto.ScreenDiagonal))
                 .ForMember(p => p.CategoryName, opt => opt.MapFrom(pdto => pdto.Maker.Name));
-                
-
+            
+            // Domain to API
+            CreateMap<Phone, PhoneDto>()
+                .ForMember(pdto => pdto.Display, opt => opt.MapFrom(p => new DisplayDto() { ScreenSize = p.ScreenSize, Resolution = p.Resolution } ))
+                .ForMember(pdto => pdto.Memory, opt => opt.MapFrom(p => new MemoryDto() { Ram = p.Ram, InternalStorage = p.InternalStorage } ));
         }
 
     }
