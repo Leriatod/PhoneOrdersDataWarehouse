@@ -35,22 +35,26 @@ namespace PhoneDataWarehouse.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         [Route("/api/reload-phones")] // ADMIN ROUTE
         public async Task<IActionResult> ReloadPhonesAsync()
         {
             var phones = new List<Phone>();
 
-            var phonesFromAllo = await DeserializePhoneFromRequestAsync<IEnumerable<AlloPhoneDto>>(ALLO_PHONES_URL);
-            var phonesFromRozetka = await DeserializePhoneFromRequestAsync<IEnumerable<RozetkaPhoneDto>>(ROZETKA_PHONES_URL);
+            var phonesFromAllo = await deserializePhoneFromRequestAsync<IEnumerable<AlloPhoneDto>>(ALLO_PHONES_URL);
+            var phonesFromRozetka = await deserializePhoneFromRequestAsync<IEnumerable<RozetkaPhoneDto>>(ROZETKA_PHONES_URL);
 
             phones.AddRange(phonesFromAllo);
             phones.AddRange(phonesFromRozetka);
 
-            return Ok(phones);
+            _context.Phones.RemoveRange(_context.Phones);
+            await _context.Phones.AddRangeAsync(phones);
+            await _context.SaveChangesAsync();
+
+            return Ok(_mapper.Map<IEnumerable<Phone>, IEnumerable<PhoneDto>>(phones));
         }
 
-        public async Task<IEnumerable<Phone>> DeserializePhoneFromRequestAsync<T>(string url)
+        private async Task<IEnumerable<Phone>> deserializePhoneFromRequestAsync<T>(string url)
         {
             var client = _clientFactory.CreateClient();
             var json = await client.GetStringAsync(url);
@@ -59,6 +63,6 @@ namespace PhoneDataWarehouse.Controllers
 
             return phones;
         }
-        
+
     }
 }

@@ -24,10 +24,9 @@ namespace PhoneDataWarehouse.Mapping
                 .ForMember(p => p.ContactPhone, opt => opt.MapFrom(pdto => pdto.Buyer.Phone))
                 .ForMember(p => p.PurchaseDate, opt => opt.MapFrom(pdto => pdto.Date));
             
-            // // Domain to API
-            // CreateMap<Phone, PhoneDto>()
-            //     .ForMember(pdto => pdto.Display, opt => opt.MapFrom(p => new DisplayDto() { ScreenSize = p.ScreenSize, Resolution = p.Resolution } ))
-            //     .ForMember(pdto => pdto.Memory, opt => opt.MapFrom(p => new MemoryDto() { Ram = p.Ram, InternalStorage = p.InternalStorage } ));
+            // Domain to API
+            CreateMap<Phone, PhoneDto>()
+                .ForMember(pdto => pdto.Contact, opt => opt.MapFrom(p => new ContactDto() { Name = p.ContactName, Email = p.ContactEmail, Phone = p.ContactPhone } ));
         }
 
     }
