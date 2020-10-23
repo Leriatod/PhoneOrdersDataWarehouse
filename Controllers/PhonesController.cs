@@ -10,11 +10,11 @@ using PhoneDataWarehouse.Dtos;
 namespace PhoneDataWarehouse.Controllers
 {
     [Route("/api/phones")]
-    public class PhoneController : Controller
+    public class PhonesController : Controller
     {
         private readonly PhoneDbContext _context; 
         private readonly IMapper _mapper;
-        public PhoneController(PhoneDbContext context, IMapper mapper)
+        public PhonesController(PhoneDbContext context, IMapper mapper)
         {
             this._mapper = mapper;
             this._context = context; 

@@ -9,14 +9,12 @@ namespace PhoneDataWarehouse.Mapping
         public MappingProfile()
         {
             // API TO DOMAIN
-            // CreateMap<RozetkaPhoneDto, Phone>()
-            //     .ForMember(p => p.Id, opt => opt.Ignore())
-            //     .ForMember(p => p.ScreenSize, opt => opt.MapFrom(pdto => pdto.Display.ScreenSize))
-            //     .ForMember(p => p.Resolution, opt => opt.MapFrom(pdto => pdto.Display.Resolution))
-            //     .ForMember(p => p.Ram, opt => opt.MapFrom(pdto => pdto.Memory.Ram))
-            //     .ForMember(p => p.InternalStorage, opt => opt.MapFrom(pdto => pdto.Memory.InternalStorage))
-            //     .ForMember(p => p.CategoryName, opt => opt.MapFrom(pdto => pdto.Category.Name))
-            //     .ForMember(p => p.OS, opt => opt.MapFrom(pdto => pdto.Category.OS));
+            CreateMap<RozetkaPhoneDto, Phone>()
+                .ForMember(p => p.Id, opt => opt.Ignore())
+                .ForMember(p => p.ContactName, opt => opt.MapFrom(pdto => pdto.Contact.Name))
+                .ForMember(p => p.ContactEmail, opt => opt.MapFrom(pdto => pdto.Contact.Email))
+                .ForMember(p => p.ContactPhone, opt => opt.MapFrom(pdto => pdto.Contact.Phone));
+                
             
             
             // CreateMap<AlloPhoneDto, Phone>()
