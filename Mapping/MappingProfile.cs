@@ -17,10 +17,12 @@ namespace PhoneDataWarehouse.Mapping
                 
             
             
-            // CreateMap<AlloPhoneDto, Phone>()
-            //     .ForMember(p => p.Id, opt => opt.Ignore())
-            //     .ForMember(p => p.ScreenSize, opt => opt.MapFrom(pdto => pdto.ScreenDiagonal))
-            //     .ForMember(p => p.CategoryName, opt => opt.MapFrom(pdto => pdto.Maker.Name));
+            CreateMap<AlloPhoneDto, Phone>()
+                .ForMember(p => p.Id, opt => opt.Ignore())
+                .ForMember(p => p.ContactName, opt => opt.MapFrom(pdto => pdto.Buyer.Name))
+                .ForMember(p => p.ContactEmail, opt => opt.MapFrom(pdto => pdto.Buyer.Email))
+                .ForMember(p => p.ContactPhone, opt => opt.MapFrom(pdto => pdto.Buyer.Phone))
+                .ForMember(p => p.PurchaseDate, opt => opt.MapFrom(pdto => pdto.Date));
             
             // // Domain to API
             // CreateMap<Phone, PhoneDto>()

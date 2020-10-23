@@ -26,6 +26,7 @@ namespace PhoneDataWarehouse
         {
             services.AddControllersWithViews();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddHttpClient();
             services.AddDbContext<PhoneDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
             // In production, the Angular files will be served from this directory
