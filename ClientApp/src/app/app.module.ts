@@ -2,12 +2,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
+
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { PhoneListComponent } from './phone-list/phone-list.component';
+import { PhonesService } from './phones.service';
 
 @NgModule({
   declarations: [
@@ -19,6 +23,8 @@ import { PhoneListComponent } from './phone-list/phone-list.component';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
@@ -26,7 +32,7 @@ import { PhoneListComponent } from './phone-list/phone-list.component';
       { path: 'phone-list', component: PhoneListComponent }
     ])
   ],
-  providers: [],
+  providers: [PhonesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

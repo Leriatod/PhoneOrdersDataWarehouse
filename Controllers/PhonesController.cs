@@ -11,7 +11,6 @@ using PhoneDataWarehouse.Dtos;
 
 namespace PhoneDataWarehouse.Controllers
 {
-    [Route("/api/phones")]
     public class PhonesController : Controller
     {
         private const string ROZETKA_PHONES_URL = "http://my-json-server.typicode.com/Leriatod/PhonesFakeApiService/rozetkaPhones/";
@@ -28,6 +27,7 @@ namespace PhoneDataWarehouse.Controllers
         }
 
         [HttpGet]
+        [Route("/api/phones")]
         public async Task<IActionResult> GetPhonesAsync()
         {
             var phones = await _context.Phones.ToListAsync();
