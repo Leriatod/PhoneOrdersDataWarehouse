@@ -9,16 +9,25 @@
                 [(ngModel)]="filter.phoneModel"
                 type="text" 
                 class="form-control" 
-                placeholder="Search phone ...">
+                placeholder="Search Phone ...">
         </div>
         <div class="form-group">
             <input 
                 #contactName
-                (keyup)="onBuyerChange(contactName.value)"
+                (keyup)="onContactChange(contactName.value)"
                 [(ngModel)]="filter.contactName"
                 type="text" 
                 class="form-control" 
-                placeholder="Search buyer ...">
+                placeholder="Search Contact ...">
+        </div>
+        <div class="form-group">
+            <input 
+                #purchaseDate
+                (keyup)="onDateChange(purchaseDate.value)"
+                [(ngModel)]="filter.purchaseDate"
+                type="text" 
+                class="form-control" 
+                placeholder="Search Date ...">
         </div>
         <button (click)="resetFilter()" class="btn btn-secondary">Reset</button>
     </div>

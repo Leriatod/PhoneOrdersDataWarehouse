@@ -13,6 +13,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { PhoneListComponent } from './phone-list/phone-list.component';
 import { PhonesService } from './phones.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common';
+import { SearchingText } from './searchingText';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       { path: 'phone-list', component: PhoneListComponent }
     ])
   ],
-  providers: [PhonesService],
+  providers: [
+    PhonesService,
+    DatePipe,
+    SearchingText
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
