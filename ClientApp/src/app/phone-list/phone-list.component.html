@@ -1,1 +1,50 @@
-<p>phone-list works!</p>
+<h2>Phone List</h2>
+
+<div class="card bg-light">
+    <div class="card-body">
+        <div class="form-group">
+            <input 
+                #phoneName
+                (keyup)="onPhoneChange(phoneName.value)"
+                type="text" 
+                class="form-control" 
+                placeholder="Search phone ...">
+        </div>
+        <div class="form-group">
+            <input 
+                #buyerName
+                (keyup)="onBuyerChange(buyerName.value)"
+                type="text" 
+                class="form-control" 
+                placeholder="Search buyer ...">
+        </div>
+        <button class="btn btn-secondary">Reset</button>
+    </div>
+</div>
+
+<br/>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Buyer Name</th>
+        <th>Buyer Email</th>
+        <th>Buyer Phone</th>
+        <th>Date</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of filteredPhones">
+            <td>
+                <a href="{{ p.descriptionUrl }}">
+                    {{ p.name }}
+                </a>
+            </td>
+            <td>{{ p.price | currency }}</td>
+            <td>{{ p.contact.name }}</td>
+            <td>{{ p.contact.email }}</td>
+            <td>{{ p.contact.phone }}</td>
+            <td>{{ p.purchaseDate | date }}</td>
+        </tr>
+    </tbody>
+</table>
