@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PhonesService } from '../phones.service';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-phone-list',
@@ -7,29 +8,41 @@ import { PhonesService } from '../phones.service';
   styleUrls: ['./phone-list.component.css']
 })
 export class PhoneListComponent implements OnInit {
+  private readonly PAGE_SIZE = 5;
+
   phones : any[];
   filteredPhones: any[];
+  displayedPhones: any[];
 
-  filter: any = {
-    phoneName: '',
-    buyerName: ''
-  }
+  filter : any = {
+    phoneModel: '',
+    contactName: '',
+    page: 1,
+    pageSize: this.PAGE_SIZE
+  };
 
   constructor(private phonesService: PhonesService) { }
 
   async ngOnInit() {
     this.phones = <any[]> await this.phonesService.getAll();
     this.filteredPhones = this.phones;
-    console.log(this.filteredPhones);
+    this.displayedPhones = _.take(this.filteredPhones, this.filter.pageSize)
+  }
+
+  resetFilter() {
+    this.filter.phoneModel = '';
+    this.filter.contactName = '';
+    this.filter.page = 1;
+    this.applyFiltering();
   }
 
   onPhoneChange(query: string) {
-    this.filter.phoneName = query.toLowerCase();
+    this.filter.phoneModel = query;
     this.applyFiltering();
   }
 
   onBuyerChange(query: string) {
-    this.filter.buyerName = query.toLowerCase();
+    this.filter.contactName = query;
     this.applyFiltering();
   }
 
@@ -37,18 +50,24 @@ export class PhoneListComponent implements OnInit {
     this.filteredPhones = this.phones;
     this.applySearchingByPhone();
     this.applySearchingByBuyer();
+    this.applyPagination();
   }
 
   private applySearchingByPhone() {
-    if (!this.filter.phoneName) return; 
+    if (!this.filter.phoneModel) return; 
     this.filteredPhones = this.filteredPhones
-      .filter(p => p.name.toLowerCase().includes(this.filter.phoneName));
+      .filter( p => p.name.toLowerCase().includes( this.filter.phoneModel.toLowerCase() ) );
   }
 
   private applySearchingByBuyer() {
-    if (!this.filter.buyerName) return;
+    if (!this.filter.contactName) return;
     this.filteredPhones = this.filteredPhones
-      .filter(p => p.contact.name.toLowerCase().includes(this.filter.buyerName));
+      .filter( p => p.contact.name.toLowerCase().includes( this.filter.contactName.toLowerCase() ) );
+  }
+
+  applyPagination() {
+    var startIndex  = (this.filter.page - 1) * this.PAGE_SIZE;
+    this.displayedPhones = _.take(_.rest(this.filteredPhones, startIndex), this.PAGE_SIZE);
   }
 
 }

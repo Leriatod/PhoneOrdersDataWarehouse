@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { PhoneListComponent } from './phone-list/phone-list.component';
 import { PhonesService } from './phones.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { PhonesService } from './phones.service';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
+    NgbModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
